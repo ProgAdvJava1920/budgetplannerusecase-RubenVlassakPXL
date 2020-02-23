@@ -3,16 +3,17 @@ package be.pxl.student.util;
 import be.pxl.student.entity.Account;
 import be.pxl.student.entity.Payment;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AccountMapperTest {
     private String validLine = "Jos,BE69771770897312,BE20957870192904,Sat Feb 15 05:15:31 CET 2020,3317.29,EUR,Quibusdam molestias voluptates ab magnam dolorem.";
+    private String invalidLine = "Jos,BE69771770897312,BE20957870192904,Feb 15 05:15:31 CET 2020,3317.29,EUR,Quibusdam molestias voluptates ab magnam dolorem.";
     private AccountMapper accountMapper = new AccountMapper();
 
     @Test
@@ -22,7 +23,6 @@ public class AccountMapperTest {
         // ASSERT
 
         Account result = accountMapper.map(validLine);
-
         assertNotNull(result);
         assertEquals("Jos", result.getName());
         assertEquals("BE69771770897312", result.getIBAN());
@@ -36,7 +36,13 @@ public class AccountMapperTest {
         // Test de currency
         assertEquals("EUR", resultPayment.getCurrency());
 
-        assertEquals(265.8, resultPayment.getAmount());
-        assertEquals("Officia harum porro omnis tenetur ut.", resultPayment.getDetail());
+        assertEquals(3317.29F, resultPayment.getAmount());
+        assertEquals("Quibusdam molestias voluptates ab magnam dolorem.", resultPayment.getDetail());
+    }
+
+    @Test
+    public void anInvalidLineReturnsANullAccount() {
+        Account result = accountMapper.map(invalidLine);
+        assertNull(result);
     }
 }
