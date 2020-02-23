@@ -12,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AccountMapperTest {
     private String validLine = "Jos,BE69771770897312,BE20957870192904,Sat Feb 15 05:15:31 CET 2020,3317.29,EUR,Quibusdam molestias voluptates ab magnam dolorem.";
     private String invalidDateLine = "Jos,BE69771770897312,BE20957870192904,Feb 15 05:15:31 CET 2020,3317.29,EUR,Quibusdam molestias voluptates ab magnam dolorem.";
-    private String invalidAmountLine = "Jos,BE69771770897312,BE20957870192904,Sat Feb 15 05:15:31 CET 2020,,EUR,Quibusdam molestias voluptates ab magnam dolorem.";
+    private String invalidAmountLine = "Jos,BE69771770897312,BE20957870192904,Sat Feb 15 05:15:31 CET 2020,abc,EUR,Quibusdam molestias voluptates ab magnam dolorem.";
     private String invalidLine = "Jos,";
     private AccountMapper accountMapper = new AccountMapper();
 
     @Test
-    public void aValidLineIsMappedToAnAccount() throws Exception {
+    public void aValidLineIsMappedToAnAccount() throws InvalidDateTimeException, InvalidAmountException {
         // ARRANGE
         // ACT
         // ASSERT
