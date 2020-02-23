@@ -17,8 +17,8 @@ public class BudgetPlannerImporter {
     public void importCsv(Path path) {
         // test of het bestand een CSV is
         if (!csvMatcher.matches(path)) {
-            // accolades wordt vervangen door de parameter
-            LOGGER.debug("Invalid file: .csv expected. Provided: {}", path);
+            // accolades worden vervangen door de parameter
+            LOGGER.error("Invalid file: .csv expected. Provided: {}", path);
             return;
         }
         if (!Files.exists(path)) {
