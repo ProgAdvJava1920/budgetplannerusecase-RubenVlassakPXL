@@ -29,16 +29,13 @@ public class BudgetPlannerImporter {
         // properste manier om bufferedreader aan te maken
         try (BufferedReader reader = Files.newBufferedReader(path)) { // try with resources
             String line = null;
+            reader.readLine(); // skip first line
             while ((line = reader.readLine()) != null) {
                 try {
-                    Account account = accountMapper.map(line);
-                    LOGGER.info(account.toString());
-                } catch (InvalidDateTimeException e) {
-                    LOGGER.error("Invalid payment date");
-                } catch (InvalidAmountException e) {
-                    LOGGER.error("Invalid payment amount");
-                } catch (NullPointerException e) {
-                    LOGGER.error("Incorrect format");
+//                    Account account = accountMapper.map(line);
+                    LOGGER.debug(accountMapper.map(line));
+                } catch (InvalidPaymentException e) {
+                    LOGGER.error("Error while mapping line: {}", e.getMessage());
                 }
             }
         } catch (IOException e) {
