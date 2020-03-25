@@ -1,30 +1,29 @@
 package be.pxl.student;
 
 import be.pxl.student.entity.Account;
-import be.pxl.student.util.BudgetPlannerImporter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.TypedQuery;
+import java.util.Scanner;
 
-public class BudgetPlanner {
-    private static final Logger LOGGER = LogManager.getLogger(BudgetPlanner.class);
-
+public class BudgetPlannerFindPayments {
     public static void main(String[] args) {
         EntityManagerFactory entityManagerFactory = null;
         EntityManager entityManager = null;
         try {
+            Scanner input = new Scanner(System.in);
             entityManagerFactory = Persistence.createEntityManagerFactory("musicdb_pu");
             entityManager = entityManagerFactory.createEntityManager();
-            BudgetPlannerImporter budgetPlannerImporter = new BudgetPlannerImporter(entityManager);
-            LOGGER.info("start reading file");
-            budgetPlannerImporter.importCsv(Paths.get("src/main/resources/account_payments.csv"));
-            LOGGER.info("finished reading file");
+            System.out.println("Geef een naam: ");
+            String name = input.nextLine();
+            TypedQuery<Account> findByName = entityManager.createNamedQuery("findByName", Account.class);
+            findByName.setParameter("name", name);
+            Account result = findByName.getSingleResult();
+            System.out.println(result.getIBAN() + " by " + result.getName());
+            System.out.println("payments: " + result.getPayments().size());
+            result.getPayments().forEach(System.out::println);
         }
         finally {
             if (entityManager != null) {
