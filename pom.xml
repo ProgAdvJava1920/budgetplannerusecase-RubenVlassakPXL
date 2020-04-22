@@ -6,8 +6,8 @@
     <artifactId>BudgetPlanner</artifactId>
     <version>SNAPSHOT-1.0</version>
     <packaging>jar</packaging>
-
     <name>BudgetPlanner</name>
+
     <url>http://maven.apache.org</url>
 
     <properties>

@@ -1,14 +1,7 @@
 package be.pxl.student.util;
 
 import be.pxl.student.entity.Account;
-import be.pxl.student.entity.Payment;
-
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Locale;
+import be.pxl.student.util.exception.InvalidPaymentException;
 
 public class AccountMapper {
 //    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
