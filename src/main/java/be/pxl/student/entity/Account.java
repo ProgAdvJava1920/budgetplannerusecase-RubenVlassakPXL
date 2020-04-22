@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-@NamedQueries(@NamedQuery(name = "findByName", query = "SELECT a FROM Account a WHERE a.name = :name"))
+@NamedQueries({
+        @NamedQuery(name = "findByName", query = "select a from Account a where a.name = :name"),
+        @NamedQuery(name = "findByIBAN", query = "select a from Account a where a.IBAN = :iban")
+})
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +17,10 @@ public class Account {
     private String name;
     @OneToMany(mappedBy = "account")
     private List<Payment> payments;
+
+    public Account() {
+        // JPA only
+    }
 
     public Long getId() {
         return id;
