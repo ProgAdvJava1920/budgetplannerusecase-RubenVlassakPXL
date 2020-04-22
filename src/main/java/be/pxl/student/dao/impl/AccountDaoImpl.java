@@ -1,7 +1,7 @@
-package dao.impl;
+package be.pxl.student.dao.impl;
 
 import be.pxl.student.entity.Account;
-import dao.AccountDao;
+import be.pxl.student.dao.AccountDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,10 +30,10 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public Account findAccountByIBAN(String IBAN) {
+    public Account findAccountByIBAN(String iban) {
         TypedQuery<Account> findByIBAN = entityManager.createNamedQuery("findByIBAN", Account.class);
-        LOGGER.info(String.format("query with IBAN [%s]", IBAN));
-        findByIBAN.setParameter("iban", IBAN);
+        LOGGER.info(String.format("query with IBAN [%s]", iban));
+        findByIBAN.setParameter("iban", iban);
         try {
             return findByIBAN.getSingleResult();
         } catch (NoResultException ex) {

@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "findByLabel", query = "select p from Payment p where p.label.id = :labelId"),
+})
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,6 +72,10 @@ public class Payment {
 
     public void setCounterAccount(Account counterAccount) {
         this.counterAccount = counterAccount;
+    }
+
+    public Label getLabel() {
+        return label;
     }
 
     @Override

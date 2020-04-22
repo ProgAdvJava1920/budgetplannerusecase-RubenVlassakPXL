@@ -1,4 +1,4 @@
-package dao;
+package be.pxl.student.dao;
 
 import be.pxl.student.entity.Account;
 
