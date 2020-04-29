@@ -6,8 +6,10 @@ import java.util.stream.Collectors;
 
 @Entity
 @NamedQueries({
+        @NamedQuery(name = "findById", query = "select a from Account a where a.id = :id"),
         @NamedQuery(name = "findByName", query = "select a from Account a where a.name = :name"),
-        @NamedQuery(name = "findByIBAN", query = "select a from Account a where a.IBAN = :iban")
+        @NamedQuery(name = "findByIBAN", query = "select a from Account a where a.IBAN = :iban"),
+        @NamedQuery(name = "findAllAccounts", query = "select a from Account a")
 })
 public class Account {
     @Id
@@ -20,6 +22,10 @@ public class Account {
 
     public Account() {
         // JPA only
+    }
+
+    public void addPayment(Payment payment) {
+        payments.add(payment);
     }
 
     public Long getId() {

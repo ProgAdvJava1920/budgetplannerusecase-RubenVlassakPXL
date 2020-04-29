@@ -3,7 +3,7 @@
              version="2.2"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	<!-- Define persistence unit -->
-	<persistence-unit name="musicdb_pu" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="musicdb" transaction-type="RESOURCE_LOCAL">
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/musicdb?useSSL=false"/>

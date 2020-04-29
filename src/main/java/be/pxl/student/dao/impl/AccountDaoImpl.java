@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class AccountDaoImpl implements AccountDao {
     private static final Logger LOGGER = LogManager.getLogger(AccountDaoImpl.class);
@@ -15,6 +16,29 @@ public class AccountDaoImpl implements AccountDao {
 
     public AccountDaoImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    @Override
+    public List<Account> findAllAccounts() {
+        TypedQuery<Account> findAllAccounts = entityManager.createNamedQuery("findAllAccounts", Account.class);
+        LOGGER.info("query for all accounts");
+        try {
+            return findAllAccounts.getResultList();
+        } catch (NoResultException ex) {
+            return null;
+        }
+    }
+
+    @Override
+    public Account findAccountById(long accountId) {
+        TypedQuery<Account> findById = entityManager.createNamedQuery("findById", Account.class);
+        LOGGER.info(String.format("query with id[%s]", accountId));
+        findById.setParameter("id", accountId);
+        try {
+            return findById.getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 
     @Override
@@ -57,5 +81,13 @@ public class AccountDaoImpl implements AccountDao {
         entityManager.persist(account);
         transaction.commit();
         return account;
+    }
+
+    @Override
+    public void removeAccount(Account account) {
+        var transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.remove(account);
+        transaction.commit();
     }
 }

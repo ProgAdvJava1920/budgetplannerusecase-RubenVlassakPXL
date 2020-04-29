@@ -24,6 +24,8 @@ public class LabelsRest {
     @Produces("application/json")
     public Response getLabels() {
         List<Label> labels = labelService.findAllLabels();
+        Label label = new Label("test");
+        labels.add(label);
         return Response.ok(labels).build();
     }
 

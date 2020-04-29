@@ -19,7 +19,7 @@ public class BudgetPlanner {
         EntityManagerFactory entityManagerFactory = null;
         EntityManager entityManager = null;
         try {
-            entityManagerFactory = Persistence.createEntityManagerFactory("musicdb_pu");
+            entityManagerFactory = Persistence.createEntityManagerFactory("musicdb");
             entityManager = entityManagerFactory.createEntityManager();
             BudgetPlannerImporter budgetPlannerImporter = new BudgetPlannerImporter(entityManager);
             LOGGER.info("start reading file");

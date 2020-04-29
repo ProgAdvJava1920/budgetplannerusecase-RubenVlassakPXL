@@ -1,21 +1,27 @@
 package be.pxl.student.service;
 
+import be.pxl.student.dao.impl.AccountDaoImpl;
+import be.pxl.student.dao.impl.LabelDaoImpl;
+import be.pxl.student.dao.impl.PaymentDaoImpl;
 import be.pxl.student.entity.Label;
+import be.pxl.student.util.EntityManagerUtil;
 import be.pxl.student.util.exception.DuplicateLabelException;
 import be.pxl.student.util.exception.LabelInUseException;
 import be.pxl.student.util.exception.LabelNotFoundException;
 import be.pxl.student.dao.LabelDao;
 import be.pxl.student.dao.PaymentDao;
 
+import javax.ejb.Stateless;
 import java.util.List;
 
+@Stateless
 public class LabelService {
     private LabelDao labelDao;
     private PaymentDao paymentDao;
 
-    public LabelService(LabelDao labelDao, PaymentDao paymentDao) {
-        this.labelDao = labelDao;
-        this.paymentDao = paymentDao;
+    public LabelService() {
+        this.labelDao = new LabelDaoImpl(EntityManagerUtil.createEntityManager());
+        this.paymentDao = new PaymentDaoImpl(EntityManagerUtil.createEntityManager());
     }
 
     public void addLabel(String name) throws DuplicateLabelException {
@@ -39,6 +45,6 @@ public class LabelService {
     }
 
     public List<Label> findAllLabels() {
-        return null;
+        return labelDao.findAllLabels();
     }
 }

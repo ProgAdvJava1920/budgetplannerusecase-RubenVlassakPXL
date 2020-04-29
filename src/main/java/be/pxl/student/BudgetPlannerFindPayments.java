@@ -14,7 +14,7 @@ public class BudgetPlannerFindPayments {
         EntityManager entityManager = null;
         try {
             Scanner input = new Scanner(System.in);
-            entityManagerFactory = Persistence.createEntityManagerFactory("musicdb_pu");
+            entityManagerFactory = Persistence.createEntityManagerFactory("musicdb");
             entityManager = entityManagerFactory.createEntityManager();
             System.out.println("Geef een naam: ");
             String name = input.nextLine();

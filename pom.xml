@@ -5,7 +5,7 @@
     <groupId>be.pxl.student</groupId>
     <artifactId>BudgetPlanner</artifactId>
     <version>SNAPSHOT-1.0</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>BudgetPlanner</name>
 
     <url>http://maven.apache.org</url>
