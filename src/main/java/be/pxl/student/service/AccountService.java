@@ -19,6 +19,14 @@ public class AccountService {
         this.accountDao = new AccountDaoImpl(EntityManagerUtil.createEntityManager());
     }
 
+    public List<Payment> findPaymentsByAccountName(String name) throws AccountNotFoundException {
+        Account account = accountDao.findAccountByName(name);
+        if (account == null) {
+            throw new AccountNotFoundException(name);
+        }
+        return account.getPayments();
+    }
+
     public void addPayment(String name, String counterAccountIBAN, float amount, String detail, LocalDate date) throws AccountNotFoundException {
         Account account = accountDao.findAccountByName(name);
         if (account == null) {
